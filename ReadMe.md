@@ -2,7 +2,7 @@
 
 ## Task
 1.  Clone repo and install all dependencies.
-2.  Upload app to the Android-NativeDemoApp to browserstack using API ([Link](https://www.browserstack.com/docs/app-automate/api-reference/appium/apps#upload-an-app)) and add unique ID to the ```wdio.conf.js```.
+2.  Upload app Android-NativeDemoApp to browserstack using API ([Link](https://www.browserstack.com/docs/app-automate/api-reference/appium/apps#upload-an-app)) and add unique ID to the ```wdio.conf.js```.
 3.  Create test 5 test cases (locators can be found using [Appium Inspector](https://github.com/appium/appium-inspector/releases) that conected to the Browserstack account).
 4.  Create workflow with using secrets (for user and key in capabilities)([description of secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)).
 5.  Create 2 config files (with different devices)
