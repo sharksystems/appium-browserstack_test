@@ -1,27 +1,56 @@
-# Repo with test task for browserstack
+# appium-browserstack_test
 
-## Task
-1.  Clone repo and install all dependencies.
-2.  Upload app Android-NativeDemoApp to browserstack using API ([Link](https://www.browserstack.com/docs/app-automate/api-reference/appium/apps#upload-an-app)) and add unique ID to the ```wdio.conf.js```.
-3.  Create test 5 test cases (locators can be found using [Appium Inspector](https://github.com/appium/appium-inspector/releases) that conected to the Browserstack account).
-4.  Create workflow with using secrets (for user and key in capabilities)([description of secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)).
-5.  Create 2 config files (with different devices)
+
+## Summary
+
+This repository contains automated tests for the WebdriverIO Android Demo App, configured to run on [Browserstack](https://www.browserstack.com) or a local Appium server
+
+## Requirements
+
+- Node.js (v20 or later)
+
+- Java - for local Appium server
+- Android Studio - for setting up local emulator
+- Appium with UiAutomator2 driver - for running tests locally
+- Appium Doctor, Appium Inspector - not nessecary for running tests but recommended for validating Appium setup
+
+## Steps to Install
+
+1. Clone the repository or go to Code > Download ZIP
+2. Install dependencies: npm install
+3. Appium: npm i --location=global appium
+appium driver install uiautomator2
+
+## Running tests locally
+
+npm run test-local
+
+Make sure Android Studio is open and the Emulated Device is running.
+Local tests are configured to run on the default Android Studio emulated device pre-installed with the latest version of the program.
+The local configuration also uses the global Appium installation on your machine, make sure it is installed and configured properly.
 
 ## Tips
-1.  You can create multiple accounts in browserstack (demo trial - 100 minutes).
-2.  First of all find all necessary locators.
-3.  In the Appium Inspector at the header choose ```Select Cloud Providers -> Browserstack``` and into ```JSON Representation``` insert the next:
-```
+
+For a fresh appium installation, it is recommended to use Appium Doctor to make sure it runs properly: 
+
+Install: npm install appium-doctor -g
+
+Run: appium-doctor
+
+If there are any missing requirements, the program points them out (android, apkanalyzer.bat could NOT be found error can be ignored).
+
+You can also use Appium Inspector to check if you can start a local sesion:
+Run Appium server manually: appium
+Capabilities: 
+
 {
-  "appium:protocol": "https",
-  "appium:hostname": "hub.browserstack.com",
-  "appium:path": "/wd/hub",
-  "appium:maxInstances": 1,
-  "appium:app": "Your App ID is here",
-  "appium:os_version": "9.0",
-  "appium:deviceName": "Google Pixel 3",
-  "platformName": "Android",
+  "appium:deviceName": "emulator-5554",
+  "appium:platformName": "Android",
+  "appium:platformVersion": "15",
+  "appium:automationName": "UiAutomator2",
+  "appium:app": "path/to/apk/file",
   "appium:autoAcceptAlerts": "true",
-  "appium:browserstack.appium_version": "1.22.0"
+  "appium:appWaitActivity": "*"
 }
-```
+
+Additionally, the deviceName may vary on different Android Studio installations, if you need to check/replace it in the config, you can go to Extended Controls > Help > Emulator ADB Serial Number
